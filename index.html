@@ -269,7 +269,7 @@
   .loc-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--grad); }
 
   /* ── CONTACT ── */
-  #contact { padding: 60px 20px 100px; }
+  #contact { padding: 60px 20px 80px; }
   .contact-card {
     max-width: 420px; margin: 0 auto;
     text-align: center;
@@ -341,10 +341,13 @@
   /* ── BOTTOM NAV (mobile only) ── */
   .bottom-nav {
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(13,13,26,0.9);
+    background: rgba(13,13,26,0.92);
     backdrop-filter: blur(20px);
     border-top: 1px solid var(--border);
-    display: flex; padding: 10px 0 14px;
+    display: flex;
+    height: 60px;
+    padding: 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
   @media (min-width: 640px) {
     .bottom-nav { display: none; }
@@ -352,13 +355,14 @@
   }
   .bnav-item {
     flex: 1; display: flex; flex-direction: column;
-    align-items: center; gap: 4px;
+    align-items: center; justify-content: center; gap: 3px;
     font-size: 10px; color: var(--muted);
     cursor: pointer; text-decoration: none;
     transition: color .2s;
+    height: 100%;
   }
   .bnav-item.active, .bnav-item:hover { color: #a78bfa; }
-  .bnav-icon { font-size: 20px; }
+  .bnav-icon { font-size: 18px; line-height: 1; }
 
   /* Fade-in on scroll */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s, transform .6s; }
@@ -540,7 +544,7 @@
     entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   reveals.forEach(r => io.observe(r));
- 
+
   const bnav = document.querySelectorAll('.bnav-item');
   const sections = ['hero','video','services','contact'];
   window.addEventListener('scroll', () => {
